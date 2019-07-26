@@ -8,11 +8,19 @@
 #include <cstdio>
 #include <cstdlib>
 
+static const char *get_python() {
+  const char *pp = getenv("PYTHON");
+  if (pp == nullptr || *pp == '\0') {
+    return "/usr/bin/python3";
+  }
+  return pp;
+}
+
 int main(int argc, char **argv) {
   fprintf(stderr, "PYTHONPATH=%s\n", getenv("PYTHONPATH"));
 
   std::vector<const char *> args;
-  args.push_back("/usr/bin/python3");
+  args.push_back(get_python());
   for (int i = 1; i < argc; ++i) {
     args.push_back(argv[i]);
   }
