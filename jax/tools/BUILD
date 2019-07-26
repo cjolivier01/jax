@@ -19,7 +19,7 @@ package(default_visibility = ["//visibility:public"])
 py_library(
     name = "jax_to_hlo",
     srcs = ["jax_to_hlo.py"],
-    deps = [
-        "//third_party/py/jax",
-    ],
+    #    deps = [
+    #        "//third_party/py/jax",
+    #    ],
 )

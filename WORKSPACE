@@ -1,3 +1,18 @@
+#local_repository(
+#    name = "jax",
+#    path = "/home/coolivie/src/jax/jax",
+#)
+#
+#local_repository(
+#    name = "build_project",
+#    path = "/home/coolivie/src/jax/build",
+#)
+
+#local_repository(
+#    name = "org_tensorflow",
+#    path = "tensorflow",
+#)
+
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
@@ -31,12 +46,12 @@ http_archive(
 )
 
 # For development, one can use a local TF repository instead.
-# local_repository(
+#local_repository(
 #    name = "org_tensorflow",
 #    path = "tensorflow",
-# )
+#)
 
-load("@org_tensorflow//tensorflow:workspace.bzl", "tf_workspace", "tf_bind")
+load("@org_tensorflow//tensorflow:workspace.bzl", "tf_bind", "tf_workspace")
 
 tf_workspace(
     path_prefix = "",

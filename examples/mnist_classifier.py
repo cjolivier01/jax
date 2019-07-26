@@ -29,7 +29,6 @@ import itertools
 import numpy.random as npr
 
 import jax.numpy as np
-from jax.config import config
 from jax import jit, grad, random
 from jax.experimental import optimizers
 from jax.experimental import stax
@@ -42,16 +41,18 @@ def loss(params, batch):
   preds = predict(params, inputs)
   return -np.mean(preds * targets)
 
+
 def accuracy(params, batch):
   inputs, targets = batch
   target_class = np.argmax(targets, axis=1)
   predicted_class = np.argmax(predict(params, inputs), axis=1)
   return np.mean(predicted_class == target_class)
 
+
 init_random_params, predict = stax.serial(
-    Dense(1024), Relu,
-    Dense(1024), Relu,
-    Dense(10), LogSoftmax)
+  Dense(1024), Relu,
+  Dense(1024), Relu,
+  Dense(10), LogSoftmax)
 
 if __name__ == "__main__":
   rng = random.PRNGKey(0)

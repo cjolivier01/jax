@@ -314,6 +314,7 @@ def main():
 
   print("\nBuilding XLA and installing it in the jaxlib source tree...")
   config_args = []
+  config_args += ["--copt=-g"]
   if args.enable_march_native:
     config_args += ["--config=opt"]
   if args.enable_mkl_dnn:
