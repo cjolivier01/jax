@@ -29,18 +29,20 @@ import itertools
 import numpy.random as npr
 
 import jax.numpy as np
+from jax.config import config
 from jax import jit, grad, random
 from jax.experimental import optimizers
 from jax.experimental import stax
 from jax.experimental.stax import Dense, Relu, LogSoftmax
 from examples import datasets
 
+def eprint(*args, **kwargs):
+  print(*args, file=sys.stderr, **kwargs)
 
 def loss(params, batch):
   inputs, targets = batch
   preds = predict(params, inputs)
   return -np.mean(preds * targets)
-
 
 def accuracy(params, batch):
   inputs, targets = batch
@@ -48,13 +50,16 @@ def accuracy(params, batch):
   predicted_class = np.argmax(predict(params, inputs), axis=1)
   return np.mean(predicted_class == target_class)
 
-
 init_random_params, predict = stax.serial(
   Dense(1024), Relu,
   Dense(1024), Relu,
   Dense(10), LogSoftmax)
 
-if __name__ == "__main__":
+def main(foo):
+  eprint("*********************************")
+  eprint("Starting...")
+  eprint("*********************************")
+#if __name__ == "__main__":
   rng = random.PRNGKey(0)
 
   step_size = 0.001
@@ -87,7 +92,7 @@ if __name__ == "__main__":
   opt_state = opt_init(init_params)
   itercount = itertools.count()
 
-  print("\nStarting training...")
+  eprint("\nStarting training...")
   for epoch in range(num_epochs):
     start_time = time.time()
     for _ in range(num_batches):
@@ -97,6 +102,6 @@ if __name__ == "__main__":
     params = get_params(opt_state)
     train_acc = accuracy(params, (train_images, train_labels))
     test_acc = accuracy(params, (test_images, test_labels))
-    print("Epoch {} in {:0.2f} sec".format(epoch, epoch_time))
-    print("Training set accuracy {}".format(train_acc))
-    print("Test set accuracy {}".format(test_acc))
+    eprint("Epoch {} in {:0.2f} sec".format(epoch, epoch_time))
+    eprint("Training set accuracy {}".format(train_acc))
+    eprint("Test set accuracy {}".format(test_acc))

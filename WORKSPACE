@@ -1,17 +1,36 @@
-#local_repository(
-#    name = "jax",
-#    path = "/home/coolivie/src/jax/jax",
-#)
-#
-#local_repository(
-#    name = "build_project",
-#    path = "/home/coolivie/src/jax/build",
-#)
+new_local_repository(
+    name = "boost",
+    build_file = "boost.BUILD",
+    path = "/opt/boost/release",
+)
 
-#local_repository(
-#    name = "org_tensorflow",
-#    path = "tensorflow",
-#)
+new_local_repository(
+    name = "python_linux",
+    build_file_content = """
+cc_library(
+    name = "python36-lib",
+    srcs = ["lib/python3.6/config-3.6m-x86_64-linux-gnu/libpython3.6.so"],
+    hdrs = glob(["include/python3.6/*.h"]),
+    includes = ["include/python3.6"],
+    visibility = ["//visibility:public"]
+)
+    """,
+    path = "/usr",
+)
+
+new_local_repository(
+    name = "python_linux",
+    build_file_content = """
+cc_library(
+    name = "python36-lib",
+    srcs = ["lib/python3.6/config-3.6m-x86_64-linux-gnu/libpython3.6.so"],
+    hdrs = glob(["include/python3.6/*.h"]),
+    includes = ["include/python3.6"],
+    visibility = ["//visibility:public"]
+)
+    """,
+    path = "/usr",
+)
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 

@@ -18,8 +18,17 @@ def loss(the_weights, the_inputs, the_targets):
     return -np.sum(label_logprobs)
 
 
+def create_file():
+    f = open("/tmp/readme_grad.out", "w+")
+    for i in range(10):
+        f.write("This is line %d\r\n" % (i + 1))
+    f.close()
+
+
+create_file()
+
 # Build a toy dataset.
-inputs = np.array([[0.52, 1.12,  0.77],
+inputs = np.array([[0.52, 1.12, 0.77],
                    [0.88, -1.08, 0.15],
                    [0.52, 0.06, -1.30],
                    [0.74, -2.49, 1.39]])

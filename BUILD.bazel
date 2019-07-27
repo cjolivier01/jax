@@ -1,9 +1,0 @@
-#local_repository(
-#    name = "jax_project",
-#    path = "/home/coolivie/src/jax/jax",
-#)
-#
-#local_repository(
-#    name = "build_project",
-#    path = "/home/coolivie/src/jax/build",
-#)
